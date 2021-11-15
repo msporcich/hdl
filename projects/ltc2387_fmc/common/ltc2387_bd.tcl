@@ -61,8 +61,8 @@ ad_ip_instance axi_clkgen axi_clkgen
 ad_ip_parameter axi_clkgen CONFIG.ID 1
 ad_ip_parameter axi_clkgen CONFIG.CLKIN_PERIOD 10
 ad_ip_parameter axi_clkgen CONFIG.VCO_DIV 1
-ad_ip_parameter axi_clkgen CONFIG.VCO_MUL 8.4
-ad_ip_parameter axi_clkgen CONFIG.CLK0_DIV 4
+ad_ip_parameter axi_clkgen CONFIG.VCO_MUL 9.6
+ad_ip_parameter axi_clkgen CONFIG.CLK0_DIV 8
 
 # connections
 
