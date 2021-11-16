@@ -47,12 +47,12 @@ module axi_ad9783_channel #(
 
   input                   dac_div_clk,
   input                   dac_rst,
-  output  reg             dac_enable,
-  output  reg [ 15:0]     dac_data_00,
-  output  reg [ 15:0]     dac_data_01,
-  output  reg [ 15:0]     dac_data_02,
-  output  reg [ 15:0]     dac_data_03,
-  input       [ 63:0]     dma_data,
+  output reg              dac_enable,
+  output reg   [15:0]     dac_data_00,
+  output reg   [15:0]     dac_data_01,
+  output reg   [15:0]     dac_data_02,
+  output reg   [15:0]     dac_data_03,
+  input        [63:0]     dma_data,
 
   // processor interface
 
@@ -64,27 +64,27 @@ module axi_ad9783_channel #(
   input                   up_rstn,
   input                   up_clk,
   input                   up_wreq,
-  input       [ 13:0]     up_waddr,
-  input       [ 31:0]     up_wdata,
+  input        [13:0]     up_waddr,
+  input        [31:0]     up_wdata,
   output                  up_wack,
   input                   up_rreq,
-  input       [ 13:0]     up_raddr,
-  output      [ 31:0]     up_rdata,
+  input        [13:0]     up_raddr,
+  output       [31:0]     up_rdata,
   output                  up_rack);
 
 
   // internal signals
 
-  wire    [ 63:0]   dac_dds_data_s;
-  wire    [ 15:0]   dac_dds_scale_1_s;
-  wire    [ 15:0]   dac_dds_init_1_s;
-  wire    [ 15:0]   dac_dds_incr_1_s;
-  wire    [ 15:0]   dac_dds_scale_2_s;
-  wire    [ 15:0]   dac_dds_init_2_s;
-  wire    [ 15:0]   dac_dds_incr_2_s;
-  wire    [ 15:0]   dac_pat_data_1_s;
-  wire    [ 15:0]   dac_pat_data_2_s;
-  wire    [  3:0]   dac_data_sel_s;
+  wire    [63:0]   dac_dds_data_s;
+  wire    [15:0]   dac_dds_scale_1_s;
+  wire    [15:0]   dac_dds_init_1_s;
+  wire    [15:0]   dac_dds_incr_1_s;
+  wire    [15:0]   dac_dds_scale_2_s;
+  wire    [15:0]   dac_dds_init_2_s;
+  wire    [15:0]   dac_dds_incr_2_s;
+  wire    [15:0]   dac_pat_data_1_s;
+  wire    [15:0]   dac_pat_data_2_s;
+  wire    [ 3:0]   dac_data_sel_s;
 
   // dac data select
 

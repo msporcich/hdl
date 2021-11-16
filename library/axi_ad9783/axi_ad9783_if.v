@@ -43,38 +43,38 @@ module axi_ad9783_if #(
 
   // dac interface
 
-  input                   dac_clk_in_p,
-  input                   dac_clk_in_n,
-  output                  dac_clk_out_p,
-  output                  dac_clk_out_n,
-  output      [15:0]      dac_data_out_p,
-  output      [15:0]      dac_data_out_n,
+  input            dac_clk_in_p,
+  input            dac_clk_in_n,
+  output           dac_clk_out_p,
+  output           dac_clk_out_n,
+  output  [15:0]   dac_data_out_p,
+  output  [15:0]   dac_data_out_n,
 
   // internal resets and clocks
 
-  input                   dac_rst,
-  output                  dac_clk,
-  output                  dac_div_clk,
-  output  reg             dac_status,
+  input            dac_rst,
+  output           dac_div_clk,
+  output reg       dac_status,
 
   // data interface
 
-  input       [15:0]      dac_data_a_0,
-  input       [15:0]      dac_data_a_1,
-  input       [15:0]      dac_data_a_2,
-  input       [15:0]      dac_data_a_3,
-  input       [15:0]      dac_data_b_0,
-  input       [15:0]      dac_data_b_1,
-  input       [15:0]      dac_data_b_2,
-  input       [15:0]      dac_data_b_3);
+  input   [15:0]   dac_data_a_0,
+  input   [15:0]   dac_data_a_1,
+  input   [15:0]   dac_data_a_2,
+  input   [15:0]   dac_data_a_3,
+  input   [15:0]   dac_data_b_0,
+  input   [15:0]   dac_data_b_1,
+  input   [15:0]   dac_data_b_2,
+  input   [15:0]   dac_data_b_3);
 
 
   // internal registers
 
   // internal signals
 
-  wire            dac_clk_in_s;
-  wire            dac_div_clk_s;
+  wire             dac_clk_in_s;
+  wire             dac_div_clk_s;
+  wire             dac_clk_s;
 
   // dac status
 
@@ -95,7 +95,7 @@ module axi_ad9783_if #(
     .FPGA_TECHNOLOGY (FPGA_TECHNOLOGY))
   i_serdes_out_data (
     .rst (dac_rst),
-    .clk (dac_clk),
+    .clk (dac_clk_s),
     .div_clk (dac_div_clk),
     .loaden (1'b0),
     .data_oe (1'b1),
@@ -120,7 +120,7 @@ module axi_ad9783_if #(
     .FPGA_TECHNOLOGY (FPGA_TECHNOLOGY))
   i_serdes_out_clk (
     .rst (dac_rst),
-    .clk (dac_clk),
+    .clk (dac_clk_s),
     .div_clk (dac_div_clk),
     .loaden (1'b0),
     .data_oe (1'b1),
@@ -141,13 +141,18 @@ module axi_ad9783_if #(
   IBUFGDS i_dac_clk_in_ibuf (
     .I (dac_clk_in_p),
     .IB (dac_clk_in_n),
-    .O (dac_clk));
+    .O (dac_clk_s));
 
-  BUFR #(.BUFR_DIVIDE("4")) i_dac_div_clk_rbuf (
-    .CLR (1'b0),
+  BUFGCE_DIV #(
+    .BUFGCE_DIVIDE (4),
+    .IS_CE_INVERTED (1'b0),
+    .IS_CLR_INVERTED (1'b0),
+    .IS_I_INVERTED (1'b0)
+  ) i_dac_div_clk_rbuf (
+    .O (dac_div_clk_s),
     .CE (1'b1),
-    .I (dac_clk),
-    .O (dac_div_clk_s));
+    .CLR (1'b0),
+    .I (dac_clk_s));
 
   BUFG i_dac_div_clk_gbuf (
     .I (dac_div_clk_s),

@@ -64,8 +64,10 @@ module axi_ad9783_core #(
   // dma interface
 
   output                  dac_valid,
-  output      [  1:0]     dac_enable,
-  input       [127:0]     dac_ddata,
+  output                  dac_enable_0,
+  output                  dac_enable_1,
+  input       [ 63:0]     dac_ddata_0,
+  input       [ 63:0]     dac_ddata_1,
   input                   dac_dunf,
 
   // processor interface
@@ -75,11 +77,11 @@ module axi_ad9783_core #(
   input                   up_wreq,
   input       [ 13:0]     up_waddr,
   input       [ 31:0]     up_wdata,
-  output  reg             up_wack,
+  output reg              up_wack,
   input                   up_rreq,
   input       [ 13:0]     up_raddr,
-  output  reg [ 31:0]     up_rdata,
-  output  reg             up_rack);
+  output reg  [ 31:0]     up_rdata,
+  output reg              up_rack);
 
 
   // internal registers
@@ -97,10 +99,14 @@ module axi_ad9783_core #(
   wire    [ 31:0]   up_rdata_s;
   wire              up_rack_s;
   wire              up_wack_s;
+  wire              dac_enable_0_reg;
+  wire              dac_enable_1_reg;
 
   // defaults
 
   assign dac_valid = 1'b1;
+  assign dac_enable_0 = dac_enable_0_reg;
+  assign dac_enable_1 = dac_enable_1_reg;
 
   // processor read interface
 
@@ -127,12 +133,12 @@ module axi_ad9783_core #(
   i_channel_0 (
     .dac_div_clk (dac_div_clk),
     .dac_rst (dac_rst),
-    .dac_enable (dac_enable[0]),
+    .dac_enable (dac_enable_0_reg),
     .dac_data_00 (dac_data_a_0),
     .dac_data_01 (dac_data_a_1),
     .dac_data_02 (dac_data_a_2),
     .dac_data_03 (dac_data_a_3),
-    .dma_data (dac_ddata[63:0]),
+    .dma_data (dac_ddata_0),
     .dac_data_sync (dac_sync_s),
     .dac_dds_format (dac_datafmt_s),
     .up_rstn (up_rstn),
@@ -155,12 +161,12 @@ module axi_ad9783_core #(
   i_channel_1 (
     .dac_div_clk (dac_div_clk),
     .dac_rst (dac_rst),
-    .dac_enable (dac_enable[1]),
+    .dac_enable (dac_enable_1_reg),
     .dac_data_00 (dac_data_b_0),
     .dac_data_01 (dac_data_b_1),
     .dac_data_02 (dac_data_b_2),
     .dac_data_03 (dac_data_b_3),
-    .dma_data (dac_ddata[127:64]),
+    .dma_data (dac_ddata_1),
     .dac_data_sync (dac_sync_s),
     .dac_dds_format (dac_datafmt_s),
     .up_rstn (up_rstn),

@@ -62,9 +62,12 @@ module axi_ad9783 #(
   // dma interface
 
   output                  dac_div_clk,
+  output                  dac_rst,
   output                  dac_valid,
-  output      [  1:0]     dac_enable,
-  input       [127:0]     dac_ddata,
+  output                  dac_enable_0,
+  output                  dac_enable_1,
+  input       [ 63:0]     dac_ddata_0,
+  input       [ 63:0]     dac_ddata_1,
   input                   dac_dunf,
 
   // axi interface
@@ -76,25 +79,25 @@ module axi_ad9783 #(
   output                  s_axi_awready,
   input                   s_axi_wvalid,
   input       [ 31:0]     s_axi_wdata,
-  input       [ 3:0]      s_axi_wstrb,
+  input       [  3:0]     s_axi_wstrb,
   output                  s_axi_wready,
   output                  s_axi_bvalid,
-  output      [ 1:0]      s_axi_bresp,
+  output      [  1:0]     s_axi_bresp,
   input                   s_axi_bready,
   input                   s_axi_arvalid,
   input       [ 15:0]     s_axi_araddr,
   output                  s_axi_arready,
   output                  s_axi_rvalid,
   output      [ 31:0]     s_axi_rdata,
-  output      [ 1:0]      s_axi_rresp,
+  output      [  1:0]     s_axi_rresp,
   input                   s_axi_rready,
-  input       [ 2:0]      s_axi_awprot,
-  input       [ 2:0]      s_axi_arprot);
+  input       [  2:0]     s_axi_awprot,
+  input       [  2:0]     s_axi_arprot);
 
 
   // internal clocks and resets
 
-  wire              dac_rst;
+  wire              dac_rst_s;
   wire              up_clk;
   wire              up_rstn;
 
@@ -122,6 +125,7 @@ module axi_ad9783 #(
 
   assign up_clk = s_axi_aclk;
   assign up_rstn = s_axi_aresetn;
+  assign dac_rst = dac_rst_s;
 
   // device interface
 
@@ -132,8 +136,7 @@ module axi_ad9783 #(
     .dac_clk_out_n (dac_clk_out_n),
     .dac_data_out_p (dac_data_out_p),
     .dac_data_out_n (dac_data_out_n),
-    .dac_rst (dac_rst),
-    .dac_clk (),
+    .dac_rst (dac_rst_s),
     .dac_div_clk (dac_div_clk),
     .dac_status (dac_status_s),
     .dac_data_a_0 (dac_data_a_0_s),
@@ -159,7 +162,7 @@ module axi_ad9783 #(
     .DATAPATH_DISABLE(DAC_DATAPATH_DISABLE))
   i_core (
     .dac_div_clk (dac_div_clk),
-    .dac_rst (dac_rst),
+    .dac_rst (dac_rst_s),
     .dac_data_a_0 (dac_data_a_0_s),
     .dac_data_a_1 (dac_data_a_1_s),
     .dac_data_a_2 (dac_data_a_2_s),
@@ -170,8 +173,10 @@ module axi_ad9783 #(
     .dac_data_b_3 (dac_data_b_3_s),
     .dac_status (dac_status_s),
     .dac_valid (dac_valid),
-    .dac_enable (dac_enable),
-    .dac_ddata (dac_ddata),
+    .dac_enable_0 (dac_enable_0),
+    .dac_enable_1 (dac_enable_1),
+    .dac_ddata_0 (dac_ddata_0),
+    .dac_ddata_1 (dac_ddata_1),
     .dac_dunf (dac_dunf),
     .up_rstn (up_rstn),
     .up_clk (up_clk),
