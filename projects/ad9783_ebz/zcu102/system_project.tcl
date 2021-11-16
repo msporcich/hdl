@@ -7,8 +7,6 @@ adi_project ad9783_zcu102
 adi_project_files ad9783_zcu102 [list \
   "system_top.v" \
   "system_constr.xdc"\
-  "$ad_hdl_dir/library/common/ad_iobuf.v" \
   "$ad_hdl_dir/projects/common/zcu102/zcu102_system_constr.xdc" ]
 
 adi_project_run ad9783_zcu102
-

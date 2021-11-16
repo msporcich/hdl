@@ -63,7 +63,7 @@ module axi_ad9783 #(
 
   output                  dac_div_clk,
   output                  dac_valid,
-  output                  dac_enable,
+  output      [  1:0]     dac_enable,
   input       [127:0]     dac_ddata,
   input                   dac_dunf,
 

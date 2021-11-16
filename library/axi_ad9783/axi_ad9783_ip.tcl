@@ -40,4 +40,3 @@ adi_add_auto_fpga_spec_params
 ipx::create_xgui_files [ipx::current_core]
 
 ipx::save_core [ipx::current_core]
-

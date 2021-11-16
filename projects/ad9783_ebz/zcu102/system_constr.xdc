@@ -43,4 +43,4 @@ set_property  -dict {PACKAGE_PIN  R8    IOSTANDARD LVDS} [get_ports data_n[15]] 
 
 # clocks
 
-create_clock -name dco_p       -period  2.00 [get_ports dco1_p]
+create_clock -name dco_p  -period  2.00 [get_ports dco1_p]
