@@ -32,6 +32,7 @@ clean:
 	$(MAKE) -C axi_ad9680 clean
 	$(MAKE) -C axi_ad9684 clean
 	$(MAKE) -C axi_ad9739a clean
+	$(MAKE) -C axi_ad9783 clean
 	$(MAKE) -C axi_ad9963 clean
 	$(MAKE) -C axi_adc_decimate clean
 	$(MAKE) -C axi_adc_trigger clean
@@ -114,6 +115,7 @@ clean:
 	$(MAKE) -C util_gmii_to_rgmii clean
 	$(MAKE) -C util_i2c_mixer clean
 	$(MAKE) -C util_mfifo clean
+	$(MAKE) -C util_mii_to_rmii clean
 	$(MAKE) -C util_pack/util_cpack2 clean
 	$(MAKE) -C util_pack/util_upack2 clean
 	$(MAKE) -C util_pad clean
@@ -156,6 +158,7 @@ lib:
 	$(MAKE) -C axi_ad9680
 	$(MAKE) -C axi_ad9684
 	$(MAKE) -C axi_ad9739a
+	$(MAKE) -C axi_ad9783
 	$(MAKE) -C axi_ad9963
 	$(MAKE) -C axi_adc_decimate
 	$(MAKE) -C axi_adc_trigger
@@ -238,6 +241,7 @@ lib:
 	$(MAKE) -C util_gmii_to_rgmii
 	$(MAKE) -C util_i2c_mixer
 	$(MAKE) -C util_mfifo
+	$(MAKE) -C util_mii_to_rmii
 	$(MAKE) -C util_pack/util_cpack2
 	$(MAKE) -C util_pack/util_upack2
 	$(MAKE) -C util_pad
