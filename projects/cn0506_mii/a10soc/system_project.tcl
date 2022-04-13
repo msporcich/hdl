@@ -1,15 +1,9 @@
-set REQUIRED_QUARTUS_VERSION 18.1.0
-set QUARTUS_PRO_ISUSED 0
-
 source ../../scripts/adi_env.tcl
 source ../../scripts/adi_project_intel.tcl
 
 adi_project cn0506_mii_a10soc
 
 source $ad_hdl_dir/projects/common/a10soc/a10soc_system_assign.tcl
-
-# files
-set_global_assignment -name VERILOG_FILE ../../../library/common/ad_iobuf.v
 
 # Note: This projects requires a hardware rework to function correctly.
 # The rework connects FMC header pins directly to the FPGA so that they can be

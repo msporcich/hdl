@@ -197,6 +197,7 @@ adi_tpl_jesd204_rx_create rx_mxfe_tpl_core $RX_NUM_OF_LANES \
                                            $RX_DMA_SAMPLE_WIDTH
 
 ad_ip_parameter rx_mxfe_tpl_core/adc_tpl_core CONFIG.EN_FRAME_ALIGN 0
+ad_ip_parameter rx_mxfe_tpl_core/adc_tpl_core CONFIG.EXT_SYNC 1
 
 ad_ip_instance util_cpack2 util_mxfe_cpack [list \
   NUM_OF_CHANNELS $RX_NUM_OF_CONVERTERS \
@@ -335,7 +336,7 @@ for {set i 0}  {$i < $RX_NUM_OF_LINKS} {incr i} {
   }
 }
 
-ad_xcvrcon  util_mxfe_xcvr axi_mxfe_rx_xcvr axi_mxfe_rx_jesd $lane_map {} rx_device_clk
+ad_xcvrcon  util_mxfe_xcvr axi_mxfe_rx_xcvr axi_mxfe_rx_jesd $lane_map {} rx_device_clk $MAX_RX_LANES
 
 # connections (dac)
 #  map the logical lane $n onto the physical lane  $lane_map[$n]
@@ -352,7 +353,7 @@ for {set i 0}  {$i < $TX_NUM_OF_LINKS} {incr i} {
   }
 }
 
-ad_xcvrcon  util_mxfe_xcvr axi_mxfe_tx_xcvr axi_mxfe_tx_jesd $lane_map {} tx_device_clk
+ad_xcvrcon  util_mxfe_xcvr axi_mxfe_tx_xcvr axi_mxfe_tx_jesd $lane_map {} tx_device_clk $MAX_TX_LANES
 
 } else {
 

@@ -46,6 +46,7 @@ module axi_adrv9001 #(
   parameter DISABLE_TX2_SSI = 0,
   parameter RX_USE_BUFG = 0,
   parameter TX_USE_BUFG = 0,
+  parameter IODELAY_CTRL = 1,
   parameter IO_DELAY_GROUP = "dev_if_delay_group",
   parameter FPGA_TECHNOLOGY = 0,
   parameter FPGA_FAMILY = 0,
@@ -280,6 +281,7 @@ module axi_adrv9001 #(
     .DRP_WIDTH (DRP_WIDTH),
     .RX_USE_BUFG (RX_USE_BUFG),
     .TX_USE_BUFG (TX_USE_BUFG),
+    .IODELAY_CTRL (IODELAY_CTRL),
     .IO_DELAY_GROUP (IO_DELAY_GROUP),
     .DISABLE_RX2_SSI (DISABLE_RX2_SSI),
     .DISABLE_TX2_SSI (DISABLE_TX2_SSI),
@@ -406,7 +408,7 @@ module axi_adrv9001 #(
   );
 
   // common processor control
-  axi_ad9001_core #(
+  axi_adrv9001_core #(
     .ID (ID),
     .NUM_LANES (NUM_LANES),
     .CMOS_LVDS_N (CMOS_LVDS_N),
